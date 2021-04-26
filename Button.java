@@ -15,7 +15,7 @@ public class Button{
 	
 	public Button(String text, float x, float y, float sizeX, float sizeY, ColorAdapter colorOn,
 			ColorAdapter colorOff, Boolean choosed) {
-		//this.tabText = this.splitText(text);
+		this.text = text;
 		this.x = x;
 		this.y = y;
 		this.sizeX = sizeX;

@@ -3,11 +3,20 @@ import processing.core.*;
 
 // Class who contains all processing-related functions such as function with textWidth(), text(), textSize()...
 public class MenuThreePoint extends PApplet{
-    public MenuThreePoint (){
+	private Menu menuCurrent;
+	private int[] size;
+    public MenuThreePoint (int[] size){
+    	this.size = size;
+    	
+    	
+    	Settings settings = new Settings(Settings.LIGHTTHEME);
+    	this.menuCurrent = new Menu(settings);
+    	menuCurrent.addButton("salut jules le bo gosse encore plus long", null);
+    	menuCurrent.addButton("Menu", null);
     }
 
     public void settings() {
-    		size(1500, 1500);
+    		size(size[0], size[1]);
     	}
 
     	public void setup() {
@@ -21,40 +30,61 @@ public class MenuThreePoint extends PApplet{
         }
     	public void draw(){
     		
-    		background(color(0,0,100));
+    		background(color(menuCurrent.getSettings().getBackground().getR(),menuCurrent.getSettings().getBackground().getG(),menuCurrent.getSettings().getBackground().getB()));
+    		drawMenuCurrent();
+    		/*
             Button bouton = new Button("coucou Roro",(float)400,(float)400,(float)200,(float)200);
             Button bouton2 = new Button("charger la partie",(float)0,(float)0,(float)200,(float)200);
-
-    		bouton.setTabText(splitText(bouton));
-            noFill();
-    	    textFont(this.createFont(bouton));
-
-    		stroke(0,0,255);
-    		float[] yList = createYList(bouton);
-
-            rect(bouton.getX(), bouton.getSizeY(), bouton.getSizeX(), bouton.getSizeY());
-            for (int i = 0; i < bouton.getTabText().length; i++) {
-            	textAlign(LEFT,TOP);
-                text(bouton.getTabText()[i], this.createXText(bouton,i), yList[i]);
-
-    		}
             
-    		bouton2.setTabText(splitText(bouton2));
-    	    textFont(this.createFont(bouton2));
-    		float[] yList2 = createYList(bouton2);
-    		rect(bouton2.getX(), bouton2.getSizeY(), bouton2.getSizeX(), bouton2.getSizeY());
-            for (int i = 0; i < bouton2.getTabText().length; i++) {
+            drawButton(bouton);
+            drawButton(bouton2);
+*/
+           
+    	}
+
+    	
+    	public Menu getMenuCurrent() {
+			return menuCurrent;
+		}
+
+		public void setMenuCurrent(Menu menuCurrent) {
+			this.menuCurrent = menuCurrent;
+		}
+
+
+		public void drawMenuCurrent() {
+    		for(int i = 0; i < this.menuCurrent.getListButton().size();i++ ) {
+    			drawButton(menuCurrent.getListButton().get(i));
+    		}
+    		
+    	}
+    	
+    	//draw calling to draw a button
+    	private void drawButton(Button cur) {
+    		cur.setTabText(splitText(cur));
+            noFill();
+    	    textFont(this.createFont(cur));
+
+    		float[] yList = createYList(cur);
+    		if (cur.getChoosed()) {
+        		stroke(cur.getColorOn().getR(),cur.getColorOn().getG(),cur.getColorOn().getB());
+        	}
+        	else {
+        		stroke(cur.getColorOff().getR(),cur.getColorOff().getG(),cur.getColorOff().getB());
+        	}
+            rect(cur.getX(), cur.getY(), cur.getSizeX(), cur.getSizeY());
+            for (int i = 0; i < cur.getTabText().length; i++) {
+            	
+        		fill(menuCurrent.getSettings().getColorText().getR(),menuCurrent.getSettings().getColorText().getG(),menuCurrent.getSettings().getColorText().getB());
+
+            	
             	textAlign(LEFT,TOP);
-                text(bouton2.getTabText()[i], this.createXText(bouton2,i), yList2[i]);
+                text(cur.getTabText()[i], this.createXText(cur,i), yList[i]);
 
     		}
-            bouton.setListener(new ButtonListener() {
-            	public void buttonListener() {
-            		println("gogogogog");
-            	}
-            });
-            bouton.click();
     	}
+    	
+    	
     	//textModifier functions
     	private String longestText(Button cur) {
     		int rowSizeMax = 0;
@@ -112,8 +142,7 @@ public class MenuThreePoint extends PApplet{
     		float sizeBlank = ((cur.getSizeY() - (sizeText* cur.getSizeTabText()))/(cur.getSizeTabText()+1));
     		float[] tabY = new float[cur.getSizeTabText()];
     		for (int i = 0; i < tabY.length;i++) {
-    			tabY[i] = cur.getSizeY() +(i * sizeText + (i+1) * sizeBlank);
-    			println("i : " + i + "\ntabY[i] : " + tabY[i]);
+    			tabY[i] = cur.getY() +(i * sizeText + (i+1) * sizeBlank);
     		}
     		return tabY;
     	}
@@ -133,9 +162,6 @@ public class MenuThreePoint extends PApplet{
     		    for (int i = 1; i < nbCut +1; i++) {
     			      int dernierEspace = text.lastIndexOf(" ", lengthText/(nbCut)+1);
     			      if ( dernierEspace > -1 ) { 
-    			    	  println("i : " +  i);
-    			    	  println("length : " + tabText.length);
-    			    	  println("text : " + cur.getText());
     			    	  tabText[i-1] = text.substring(0, dernierEspace);
     			    	  text = text.substring(dernierEspace+1, text.length());
     			        } else {
@@ -148,7 +174,6 @@ public class MenuThreePoint extends PApplet{
     			return new String[]{cur.getText()};
     			}
     		for (int i = 0; i < tabText.length; i++) {
-        		println(tabText[i]);
 
 			}
     	    return tabText;
