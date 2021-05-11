@@ -46,9 +46,11 @@ public class MenuThreePoint extends PApplet{
 
 
 		public void drawMenuCurrent() {
-			fill(menuCurrent.getSettings().getColorText().getR(),menuCurrent.getSettings().getColorText().getG(),menuCurrent.getSettings().getColorText().getB());
-        	textAlign(LEFT,TOP);
-            text(this.menuCurrent.getTitle(), this.menuCurrent.getSettings().getxTitle(), this.menuCurrent.getSettings().getyTitle());
+			if (this.getMenuCurrent().getSettings().getTitle()) {
+				fill(menuCurrent.getSettings().getColorText().getR(),menuCurrent.getSettings().getColorText().getG(),menuCurrent.getSettings().getColorText().getB());
+        		textAlign(LEFT,TOP);
+            	text(this.menuCurrent.getTitle(), this.menuCurrent.getSettings().getxTitle(), this.menuCurrent.getSettings().getyTitle());
+			}
 			if (this.menuCurrent.getListButton().size() < menuCurrent.getSettings().getDeroulant()) {
 	    		for(int i = 0; i < this.menuCurrent.getListButton().size();i++ ) {
 	    			drawButton(menuCurrent.getListButton().get(i));
