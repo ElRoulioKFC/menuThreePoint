@@ -1,24 +1,47 @@
 package menuThreePoint;
 
 public class Settings {
-	public static int LIGHTTHEME = 0;
+	public static int LIGHTTHEME = 0,LIGHTTHEMEWITHTITLE = 1;
 	private ColorAdapter on,off,background,colorText;
-	private int baseX,baseY,sizeX,sizeY;
-	
+	//without title
+	private int baseX,baseY,sizeX,sizeY,deroulant;
+	//with title
+	private int xTitle,yTitle,sizeText,decalage;
+	private Boolean title;
 	public Settings(int theme) {
 		if (theme == Settings.LIGHTTHEME) {
 			
-			this.off = new ColorAdapter(0,0,0);
+			this.on = new ColorAdapter(0,0,0);
 			this.off = new ColorAdapter(255,195,77);
 			this.background = new ColorAdapter(255,255,255);
 			this.colorText = new ColorAdapter(0,0,0);
 			this.baseX = 100 ;
-			this.baseY = 200 ;
+			this.baseY = 150 ;
 			this.sizeX = 200 ;
 			this.sizeY = 100 ;
+			this.deroulant = 6;
+			this.title = false;
+		}
+		if (theme == Settings.LIGHTTHEMEWITHTITLE) {
+					
+			this.on = new ColorAdapter(0,0,0);
+			this.off = new ColorAdapter(255,195,77);
+			this.background = new ColorAdapter(255,255,255);
+			this.colorText = new ColorAdapter(0,0,0);
+			this.baseX = 100 ;
+			this.baseY = 150 ;
+			this.sizeX = 200 ;
+			this.sizeY = 100 ;
+			this.deroulant = 6;
+			this.xTitle = 100 ;
+			this.yTitle = 10 ;
+			this.sizeText = 32;
+			this.decalage = 85;
+			this.title = true;
 		}
 	}
 
+	
 	public Settings(ColorAdapter on, ColorAdapter off,ColorAdapter background) {
 		this.on = on;
 		this.off = off;
@@ -89,4 +112,63 @@ public class Settings {
 	public void setBackground(ColorAdapter background) {
 		this.background = background;
 	}
+	public int getDeroulant() {
+		return deroulant;
+	}
+
+	public void setDeroulant(int deroulant) {
+		this.deroulant = deroulant;
+	}
+
+
+	public int getDecalage() {
+		return decalage;
+	}
+
+
+	public void setDecalage(int decalage) {
+		this.decalage = decalage;
+	}
+
+
+	public int getSizeText() {
+		return sizeText;
+	}
+
+
+	public void setSizeText(int sizeText) {
+		this.sizeText = sizeText;
+	}
+
+
+	public int getxTitle() {
+		return xTitle;
+	}
+
+
+	public void setxTitle(int xTitle) {
+		this.xTitle = xTitle;
+	}
+
+
+	public int getyTitle() {
+		return yTitle;
+	}
+
+
+	public void setyTitle(int yTitle) {
+		this.yTitle = yTitle;
+	}
+
+
+	public Boolean getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(Boolean title) {
+		this.title = title;
+	}
+
+	
 }

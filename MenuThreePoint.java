@@ -32,14 +32,7 @@ public class MenuThreePoint extends PApplet{
     		
     		background(color(menuCurrent.getSettings().getBackground().getR(),menuCurrent.getSettings().getBackground().getG(),menuCurrent.getSettings().getBackground().getB()));
     		drawMenuCurrent();
-    		/*
-            Button bouton = new Button("coucou Roro",(float)400,(float)400,(float)200,(float)200);
-            Button bouton2 = new Button("charger la partie",(float)0,(float)0,(float)200,(float)200);
-            
-            drawButton(bouton);
-            drawButton(bouton2);
-*/
-           
+    
     	}
 
     	
@@ -53,12 +46,52 @@ public class MenuThreePoint extends PApplet{
 
 
 		public void drawMenuCurrent() {
-    		for(int i = 0; i < this.menuCurrent.getListButton().size();i++ ) {
-    			drawButton(menuCurrent.getListButton().get(i));
-    		}
-    		
-    	}
-    	
+			fill(menuCurrent.getSettings().getColorText().getR(),menuCurrent.getSettings().getColorText().getG(),menuCurrent.getSettings().getColorText().getB());
+        	textAlign(LEFT,TOP);
+            text(this.menuCurrent.getTitle(), this.menuCurrent.getSettings().getxTitle(), this.menuCurrent.getSettings().getyTitle());
+			if (this.menuCurrent.getListButton().size() < menuCurrent.getSettings().getDeroulant()) {
+	    		for(int i = 0; i < this.menuCurrent.getListButton().size();i++ ) {
+	    			drawButton(menuCurrent.getListButton().get(i));
+	    		}
+			}
+			else {
+				int start;
+				if (menuCurrent.getSettings().getDeroulant()%2 == 0) {
+					start = menuCurrent.getSettings().getDeroulant()/2;
+				}
+				else {
+					start = menuCurrent.getSettings().getDeroulant()/2;
+				}
+				start = menuCurrent.getCursor()- start;
+				if (start < 0) {
+					start = 0;
+				}
+				if (!(start + menuCurrent.getSettings().getDeroulant() < menuCurrent.getListButton().size())) {
+					for (int i = 0; i < start; i++) {
+						menuCurrent.downAllButton();
+					}
+					for (int i = start; i < menuCurrent.getListButton().size(); i++) {
+						drawButton(menuCurrent.getListButton().get(i));
+						}
+					for (int i = 0; i < start; i++) {
+						menuCurrent.upAllButton();
+					}
+				}else {
+					for (int i = 0; i < start; i++) {
+						menuCurrent.downAllButton();
+					}
+					for (int i = start; i < start + menuCurrent.getSettings().getDeroulant(); i++) {
+						drawButton(menuCurrent.getListButton().get(i));
+						}
+					for (int i = 0; i < start; i++) {
+						menuCurrent.upAllButton();
+					}
+				
+					}
+				}
+			}
+
+
     	//draw calling to draw a button
     	private void drawButton(Button cur) {
     		cur.setTabText(splitText(cur));
