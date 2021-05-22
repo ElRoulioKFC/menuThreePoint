@@ -65,10 +65,13 @@ public class Menu {
 	}
 	
 	public void click() {
+		if (this.cursor < this.listButton.size()) {
 		this.listButton.get(this.cursor).click();
+		}
 	}
 	
 	public void addButton(String text,ButtonListener listener) {
+		
 		if (this.settings.getTitle()){
 			int sizeList = this.listButton.size();
 			Button cur = new Button(text,settings.getBaseX(),settings.getBaseY() * sizeList + 1 + this.getSettings().getDecalage(),settings.getSizeX() ,settings.getSizeY(),settings.getOn(),settings.getOff(),false);
@@ -82,8 +85,14 @@ public class Menu {
 			cur.setListener(listener);
 			this.listButton.add(cur);
 	}
+	if (this.getListButton().size() == 1){
+		this.getListButton().get(0).setChoosed(true);
+			}
 	}
 	
+	public void renameButton(int nb,String text) {
+		this.listButton.get(nb).setText(text);
+	}
 	public void addTitle(String text) {
 		if (this.settings.getTitle()){
 			this.title = text;

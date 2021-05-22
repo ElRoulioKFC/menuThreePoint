@@ -1,4 +1,6 @@
 package menuThreePoint;
+import java.util.ArrayList;
+
 import processing.core.*;
 
 // Class who contains all processing-related functions such as function with textWidth(), text(), textSize()...
@@ -11,7 +13,7 @@ public class MenuThreePoint extends PApplet{
     	
     	Settings settings = new Settings(Settings.LIGHTTHEME);
     	this.menuCurrent = new Menu(settings);
-    	menuCurrent.addButton("salut jules le bo gosse encore plus long", null);
+    	menuCurrent.addButton("salut" , null);
     	menuCurrent.addButton("Menu", null);
     }
 
@@ -29,7 +31,6 @@ public class MenuThreePoint extends PApplet{
     		
         }
     	public void draw(){
-    		
     		background(color(menuCurrent.getSettings().getBackground().getR(),menuCurrent.getSettings().getBackground().getG(),menuCurrent.getSettings().getBackground().getB()));
     		drawMenuCurrent();
     
@@ -41,7 +42,15 @@ public class MenuThreePoint extends PApplet{
 		}
 
 		public void setMenuCurrent(Menu menuCurrent) {
+			if ((menuCurrent.getListButton().size() > 0) || (menuCurrent.getSettings().getTitle())) {
 			this.menuCurrent = menuCurrent;
+			if (this.getMenuCurrent().getCursor() > this.getMenuCurrent().getListButton().size()) {
+				this.getMenuCurrent().setCursor(0);
+			}
+			}
+			else {
+				println("essaye de rentrer dans un menu vide");
+			}
 		}
 
 
@@ -49,6 +58,7 @@ public class MenuThreePoint extends PApplet{
 			if (this.getMenuCurrent().getSettings().getTitle()) {
 				fill(menuCurrent.getSettings().getColorText().getR(),menuCurrent.getSettings().getColorText().getG(),menuCurrent.getSettings().getColorText().getB());
         		textAlign(LEFT,TOP);
+        		textSize(this.getMenuCurrent().getSettings().getSizeText());
             	text(this.menuCurrent.getTitle(), this.menuCurrent.getSettings().getxTitle(), this.menuCurrent.getSettings().getyTitle());
 			}
 			if (this.menuCurrent.getListButton().size() < menuCurrent.getSettings().getDeroulant()) {
@@ -81,18 +91,31 @@ public class MenuThreePoint extends PApplet{
 				}else {
 					for (int i = 0; i < start; i++) {
 						menuCurrent.downAllButton();
+
 					}
 					for (int i = start; i < start + menuCurrent.getSettings().getDeroulant(); i++) {
-						drawButton(menuCurrent.getListButton().get(i));
+							drawButton(menuCurrent.getListButton().get(i));
 						}
+							
+					
 					for (int i = 0; i < start; i++) {
 						menuCurrent.upAllButton();
+
 					}
 				
 					}
+				
+			}
+			if ((this.getMenuCurrent().getListButton().get(0).getY() < 0) || (this.getMenuCurrent().getListButton().get(0).getY() > this.getMenuCurrent().getSettings().getBaseY()+5) ) {
+				Menu menuCur = this.getMenuCurrent();
+				menuCur.setListButton(new ArrayList<Button>());
+				for (int i = 0;i< this.getMenuCurrent().getListButton().size();i++) {
+					menuCur.addButton(this.getMenuCurrent().getListButton().get(i).getText(), this.getMenuCurrent().getListButton().get(i).getListener());
+				}
+				this.getMenuCurrent().setListButton(menuCur.getListButton());
 				}
 			}
-
+				
 
     	//draw calling to draw a button
     	private void drawButton(Button cur) {
@@ -171,7 +194,6 @@ public class MenuThreePoint extends PApplet{
      	        textSize(cur.getFontSize());
         		sizeText = textDescent() + textAscent();
         		currentSize = (float) (sizeText * cur.getSizeTabText() * 1.5);
-        		//println("while : " + ( sizeText * cur.getSizeTabText() * 1.5) +" size :  "  + cur.getSizeY() );
     		}
 
     		float sizeBlank = ((cur.getSizeY() - (sizeText* cur.getSizeTabText()))/(cur.getSizeTabText()+1));
