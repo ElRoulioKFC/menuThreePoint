@@ -106,6 +106,7 @@ public class MenuThreePoint extends PApplet{
 					}
 				
 			}
+			if (this.getMenuCurrent().getListButton().size() > 0) {
 			if ((this.getMenuCurrent().getListButton().get(0).getY() < 0) || (this.getMenuCurrent().getListButton().get(0).getY() > this.getMenuCurrent().getSettings().getBaseY()+5) ) {
 				Menu menuCur = this.getMenuCurrent();
 				menuCur.setListButton(new ArrayList<Button>());
@@ -114,6 +115,7 @@ public class MenuThreePoint extends PApplet{
 				}
 				this.getMenuCurrent().setListButton(menuCur.getListButton());
 				}
+			}
 			}
 				
 
