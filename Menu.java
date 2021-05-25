@@ -85,7 +85,7 @@ public class Menu {
 			cur.setListener(listener);
 			this.listButton.add(cur);
 	}
-	if (this.getListButton().size() == 1){
+	if (this.getListButton().size() == 1 && this.getCursor() == 0){
 		this.getListButton().get(0).setChoosed(true);
 			}
 	}
