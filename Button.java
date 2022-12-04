@@ -6,13 +6,13 @@ import processing.core.PFont;
 public class Button{
 	private String[] tabText;
 	private float x,y,sizeX,sizeY,fontSize;
-	
+
 	private ColorAdapter colorOn,colorOff;
 	private Boolean choosed;
 	private String text;
 	private PFont font;
 	private ButtonListener listener;
-	
+
 	public Button(String text, float x, float y, float sizeX, float sizeY, ColorAdapter colorOn,
 			ColorAdapter colorOff, Boolean choosed) {
 		this.text = text;
@@ -24,17 +24,18 @@ public class Button{
 		this.colorOff = colorOff;
 		this.choosed = choosed;
 	}
-	
+
 	public Button(String text, float x, float y, float sizeX, float sizeY) {
 		this.x = x;
 		this.y = y;
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		this.text = text;
+		this.error
 		}
-	
 
-	
+
+
 	//getters and setters
 
 	public String getText() {
@@ -96,7 +97,7 @@ public class Button{
 	public int getSizeTabText() {
 		return this.tabText.length;
 	}
-	
+
 	public float getFontSize() {
 		return fontSize;
 	}
@@ -104,7 +105,7 @@ public class Button{
 	public void setFontSize(float fontSize) {
 		this.fontSize = fontSize;
 	}
-	
+
 	public void setListener(ButtonListener listener) {
 		this.listener = listener;
 	}
@@ -115,6 +116,5 @@ public class Button{
 	public void click() {
 		this.listener.buttonListener();
 	}
-	
+
 }
-	
